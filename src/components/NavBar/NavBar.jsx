@@ -11,7 +11,7 @@ export default function NavBar() {
     <>
 <nav  className={css.nav} >
 <NavLink to='/' className={buildLinkClass}>Home</NavLink>
-<NavLink className={buildLinkClass} to='/movies'>Movies</NavLink>
+<NavLink to='/movies' className={buildLinkClass} >Movies</NavLink>
 </nav>
 </>)
 }
