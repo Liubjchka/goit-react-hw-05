@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 
 export default function MoviesPage() {
 const [movies, setMovies] =  useState([]);
+const [error, setError] = useState(false);
 
 
 useEffect(()=>{
@@ -19,7 +20,12 @@ const controller = new AbortController();
         console.log(response.data.results);
 return response;
 
-        } catch (error) {}
+        } catch (error) {
+            if (error.code !== 'ERR_CANCELED') {
+                // console.log(error);
+                setError(true);
+            }
+        }
     }
 fetchData();
 
@@ -31,6 +37,9 @@ return () =>{
 return (
     <div>
     <h1>Trending today</h1>
+
+{error && <p>OOPS! ERROR!</p>}
+
     {movies.length > 0 && (
         <ul>
         {movies.map((movie) => (
