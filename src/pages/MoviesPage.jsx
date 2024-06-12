@@ -1,5 +1,6 @@
-import axios from 'axios';
+
 import { useEffect, useState } from "react"
+import { getMovies } from "../apiService/api";
 
 export default function MoviesPage() {
 const [movies, setMovies] =  useState([]);
@@ -11,14 +12,15 @@ const controller = new AbortController();
 
     async function fetchData() {
         try {
-            const response = await axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key=33093cbbc00611921b04f9776f3628fe', 
-                {
-                    signal: controller.signal
-                }
-            )
-        setMovies(prevMovies => [...prevMovies, ...response.data.results]);
-        console.log(response.data.results);
-return response;
+            const fetchMovies = await getMovies({
+                abortController : controller,
+            });
+            setMovies(fetchMovies)
+
+        // setMovies(prevMovies => [...prevMovies, ...fetchMovies]);
+        
+        console.log(fetchMovies);
+
 
         } catch (error) {
             if (error.code !== 'ERR_CANCELED') {
