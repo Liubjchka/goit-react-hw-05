@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react"
 import { getMovies } from "../apiService/api";
+import { Link } from "react-router-dom";
 
 export default function MoviesPage() {
 const [movies, setMovies] =  useState([]);
@@ -46,7 +47,7 @@ return (
         <ul>
         {movies.map((movie) => (
             <li key={movie.id}>
-            <p>{movie.title}</p>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
             </li>
         ))}
         </ul>

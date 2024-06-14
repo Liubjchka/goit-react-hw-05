@@ -4,6 +4,7 @@ import MoviesPage from '../../pages/MoviesPage';
 import NotFoundPage from '../../pages/NotFoundPage';
 import HomePage from '../../pages/HomePage'
 import NavBar from '../NavBar/NavBar';
+import MovieDetailsPage from '../../pages/MovieDetailsPage';
 // import { lazy } from 'react';
 
 // http://localhost:5173/ - початкова сторінка/home
@@ -23,7 +24,8 @@ export const App = () => {
 
 <Routes>
   <Route path="/"   element={<HomePage/>}/>
-  <Route path='/movies' element={<MoviesPage/>}/>
+  <Route path='/movies/' element={<MoviesPage/>}/>
+  <Route path='/movies/:moviesId' element={<MovieDetailsPage/>}/>
   <Route path='*' element={<NotFoundPage/>}/>
 </Routes>
 
