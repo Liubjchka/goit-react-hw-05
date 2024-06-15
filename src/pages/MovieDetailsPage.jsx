@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom"
+import { Link, Outlet, useParams } from "react-router-dom"
 import { getMovieById } from "../apiService/api";
 import { MovieReviews } from "../components/MovieReviews/MovieReviews";
 import { MovieCast } from "../components/MovieCast/MovieCast";
@@ -50,14 +50,12 @@ useEffect(()=>{
             </p>
             </div>
 
+{/* //вкладені маршрути */}
             <div>
                 <Link to='movie-cast'>Movie Cast</Link>
-
                 <Link to='movie-reviews'>Movie Reviews</Link>
             </div>
-
-<MovieReviews/>
-<MovieCast/>
+<Outlet/>
 
         </div>)}
         </div>

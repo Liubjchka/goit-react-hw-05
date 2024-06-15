@@ -5,6 +5,8 @@ import NotFoundPage from '../../pages/NotFoundPage';
 import HomePage from '../../pages/HomePage'
 import NavBar from '../NavBar/NavBar';
 import MovieDetailsPage from '../../pages/MovieDetailsPage';
+import { MovieCast } from '../MovieCast/MovieCast';
+import { MovieReviews } from '../MovieReviews/MovieReviews';
 // import { lazy } from 'react';
 
 // http://localhost:5173/ - початкова сторінка/home
@@ -26,8 +28,8 @@ export const App = () => {
   <Route path="/"   element={<HomePage/>}/>
   <Route path='/movies/' element={<MoviesPage/>}/>
   <Route path='/movies/:moviesId' element={<MovieDetailsPage/>}>
-    <Route path='movie-cast' element={<div>Movie Cast</div>}/>
-    <Route path='movie-reviews' element={<div>Movie Reviews</div>}/>
+    <Route path='movie-cast' element={<MovieCast/>}/>
+    <Route path='movie-reviews' element={<MovieReviews/>}/>
   </Route>
   <Route path='*' element={<NotFoundPage/>}/>
 </Routes>

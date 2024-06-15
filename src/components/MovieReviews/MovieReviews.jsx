@@ -1,3 +1,3 @@
 export const MovieReviews = () => {
-    return <h1>MovieReviews</h1>
+    return <h1>Love!</h1>
 }
