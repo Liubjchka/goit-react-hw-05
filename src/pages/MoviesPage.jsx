@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import { getMovies } from "../apiService/api";
 import { MovieList } from "../components/MovieList/MovieList";
+import { PageTitle } from "../components/PageTitle/PageTitle";
 
 export default function MoviesPage() {
 const [movies, setMovies] =  useState([]);
@@ -17,12 +18,6 @@ const controller = new AbortController();
                 abortController : controller,
             });
             setMovies(fetchMovies)
-
-        // setMovies(prevMovies => [...prevMovies, ...fetchMovies]);
-        
-        // console.log(fetchMovies);
-
-
         } catch (error) {
             if (error.code !== 'ERR_CANCELED') {
                 // console.log(error);
@@ -39,11 +34,9 @@ return () =>{
 
 return (
     <div>
-    <h1>Trending today</h1>
-
+    <PageTitle>Trending today</PageTitle>
 {error && <p>OOPS! ERROR!</p>}
-
-    {movies.length > 0 && (<MovieList movies={movies} />)}
+    {movies.length > 0 && <MovieList movies={movies} />}
     </div>
 );
 }

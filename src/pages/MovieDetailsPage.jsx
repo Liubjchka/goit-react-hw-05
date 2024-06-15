@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { getMovieById } from "../apiService/api";
+import { MovieReviews } from "../components/MovieReviews/MovieReviews";
+import { MovieCast } from "../components/MovieCast/MovieCast";
 
 export default function MovieDetailsPage() {
 const {moviesId} = useParams();
@@ -26,11 +28,11 @@ useEffect(()=>{
         {error && <p>Error fetching movie: {error}</p>}
 
         {movie && (<div>
+        <div>
             <h2>Title: {movie.title || movie.name}</h2>
             <p>Runtime: {movie.runtime} min</p>
             <p>Description: {movie.overview}</p>
-            
-<p>
+            <p>
             {movie.poster_path && (
             <img
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -38,7 +40,6 @@ useEffect(()=>{
             />
             )}
             </p>
-
             <p>
             {movie.backdrop_path && (
             <img
@@ -47,6 +48,16 @@ useEffect(()=>{
             />
             )}
             </p>
+            </div>
+
+            <div>
+                <Link to='movie-cast'>Movie Cast</Link>
+
+                <Link to='movie-reviews'>Movie Reviews</Link>
+            </div>
+
+<MovieReviews/>
+<MovieCast/>
 
         </div>)}
         </div>
