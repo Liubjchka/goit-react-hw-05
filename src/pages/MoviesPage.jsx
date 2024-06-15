@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 import { getMovies } from "../apiService/api";
-import { Link } from "react-router-dom";
+import { MovieList } from "../components/MovieList/MovieList";
 
 export default function MoviesPage() {
 const [movies, setMovies] =  useState([]);
@@ -20,7 +20,7 @@ const controller = new AbortController();
 
         // setMovies(prevMovies => [...prevMovies, ...fetchMovies]);
         
-        console.log(fetchMovies);
+        // console.log(fetchMovies);
 
 
         } catch (error) {
@@ -43,15 +43,7 @@ return (
 
 {error && <p>OOPS! ERROR!</p>}
 
-    {movies.length > 0 && (
-        <ul>
-        {movies.map((movie) => (
-            <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-            </li>
-        ))}
-        </ul>
-    )}
+    {movies.length > 0 && (<MovieList movies={movies} />)}
     </div>
 );
 }

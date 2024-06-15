@@ -26,14 +26,23 @@ useEffect(()=>{
         {error && <p>Error fetching movie: {error}</p>}
 
         {movie && (<div>
-            <p>ID: {movie.id}</p>
-            <p>Title: {movie.title || movie.name}</p>
-
+            <h2>Title: {movie.title || movie.name}</h2>
+            <p>Runtime: {movie.runtime} min</p>
+            <p>Description: {movie.overview}</p>
+            
 <p>
-            Poster:
             {movie.poster_path && (
             <img
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title || movie.name}
+            />
+            )}
+            </p>
+
+            <p>
+            {movie.backdrop_path && (
+            <img
+                src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
                 alt={movie.title || movie.name}
             />
             )}
