@@ -25,7 +25,9 @@ export const App = () => {
 <NavBar/>
 
 <Routes>
-  <Route path="/"   element={<HomePage/>}/>
+  <Route path="/"   element={<HomePage/>}>
+    
+  </Route>
   <Route path='/movies/' element={<MoviesPage/>}/>
   <Route path='/movies/:moviesId' element={<MovieDetailsPage/>}>
     <Route path='movie-cast' element={<MovieCast/>}/>
