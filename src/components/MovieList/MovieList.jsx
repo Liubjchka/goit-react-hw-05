@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 export const MovieList = ({movies}) => {
     const location = useLocation();
-    //об'єкт, що описує поточний URL;
-    console.log(location);
    
     return (
         <ul>

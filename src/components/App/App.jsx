@@ -1,21 +1,22 @@
 
 import { Route, Routes } from 'react-router-dom'
-import MoviesPage from '../../pages/MoviesPage';
-import NotFoundPage from '../../pages/NotFoundPage';
-import HomePage from '../../pages/HomePage'
-import NavBar from '../NavBar/NavBar';
-import MovieDetailsPage from '../../pages/MovieDetailsPage';
-import { MovieCast } from '../MovieCast/MovieCast';
-import { MovieReviews } from '../MovieReviews/MovieReviews';
-// import { lazy } from 'react';
+import { Suspense, lazy } from 'react';
 
-// http://localhost:5173/ - початкова сторінка/home
-// http://localhost:5173/about 
-// http://localhost:5173/profile
+// import NavBar from '../NavBar/NavBar';
+// import MoviesPage from '../../pages/MoviesPage';
+// import NotFoundPage from '../../pages/NotFoundPage';
+// import HomePage from '../../pages/HomePage'
+// import MovieDetailsPage from '../../pages/MovieDetailsPage';
+// import { MovieCast } from '../MovieCast/MovieCast';
+// import { MovieReviews } from '../MovieReviews/MovieReviews';
 
-// const Home = lazy(()=> import('../../pages/HomePage').then((module)=>({default:module.Home})))
-//Не потрібно в pages default
-
+const HomePage = lazy(()=> import('../../pages/HomePage'));
+const MoviesPage = lazy(()=> import('../../pages/MoviesPage'));
+const NotFoundPage = lazy(()=> import('../../pages/NotFoundPage'));
+const MovieDetailsPage = lazy(()=> import('../../pages/MovieDetailsPage'));
+const MovieCast = lazy(()=> import('../MovieCast/MovieCast'));
+const MovieReviews = lazy(()=> import('../MovieReviews/MovieReviews'));
+const NavBar  = lazy(()=>import('../NavBar/NavBar'))
 
 export const App = () => {
 
@@ -24,10 +25,9 @@ export const App = () => {
 
 <NavBar/>
 
+<Suspense fallback={<b>Loading page...</b>}>
 <Routes>
-  <Route path="/"   element={<HomePage/>}>
-    
-  </Route>
+  <Route path="/"   element={<HomePage/>}/>
   <Route path='/movies' element={<MoviesPage/>}/>
   <Route path='/movies/:moviesId' element={<MovieDetailsPage/>}>
     <Route path='movie-cast' element={<MovieCast/>}/>
@@ -35,8 +35,7 @@ export const App = () => {
   </Route>
   <Route path='*' element={<NotFoundPage/>}/>
 </Routes>
-
-{/* <h1>Ruting is React</h1> */}
+</Suspense>
 
 </div>
   )

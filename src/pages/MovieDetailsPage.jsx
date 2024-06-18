@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 import { getMovieById } from "../apiService/api";
 import { PageTitle } from "../components/PageTitle/PageTitle";
@@ -28,7 +28,7 @@ useEffect(()=>{
     return (
         <div>
 <PageTitle>MovieDetailsPage</PageTitle>
-<BackLink href={backLinkRef.current ?? "/movies"}>Go back</BackLink>
+<BackLink href={backLinkRef.current ?? "/movies"} >Go back</BackLink>
 
         {error && <p>Error fetching movie: {error}</p>}
         {movie && (<div>
@@ -55,12 +55,13 @@ useEffect(()=>{
             </div>
 
 {/* //вкладені маршрути */}
-            <div>
-                <Link to='movie-cast'>Movie Cast</Link>
-                <Link to='movie-reviews'>Movie Reviews</Link>
-            </div>
+<div>
+    <Link to='movie-cast'>Movie Cast</Link>
+    <Link to='movie-reviews'>Movie Reviews</Link>
+</div>
+<Suspense fallbach={<b>Loading subpage...</b>}>
 <Outlet/>
-
+</Suspense>
         </div>)}
         </div>
     )
