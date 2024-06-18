@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { MovieList } from "../components/MovieList/MovieList";
 import { getMovies } from "../apiService/api";
 import { useSearchParams } from "react-router-dom";
+import Loader from "../components/Loader/Loader";
 
 export default function MoviesPage() {
 const [movies, setMovies] = useState([]);
-const [error, setError] = useState(false)
+const [error, setError] = useState(false);
+const [loading, setLoading] = useState(false);
 
 const [params, setParams] = useSearchParams();
 //об'єкт, що описує URL;
@@ -18,11 +20,11 @@ if (filter === "") {
     return;
 }
 
-
     const controller = new AbortController();
     
         async function fetchData() {
             try {
+                setLoading(true);
                 const fetchMovies = await getMovies({
                     abortController : controller,
                 });
@@ -32,6 +34,8 @@ if (filter === "") {
                     // console.log(error);
                     setError(true);
                 }
+            } finally {
+                setLoading(false);
             }
         }
     fetchData();
@@ -52,6 +56,7 @@ const  filteredMovies = movies.filter(movie => movie.title.toLowerCase().include
 
     return (
         <div>
+        {loading && <Loader/>}
         <Filter value={filter} onChange={changeFilter} />
         {error && <p>OOPS! ERROR!</p>}
         {filteredMovies.length > 0 && <MovieList movies={filteredMovies} />}
