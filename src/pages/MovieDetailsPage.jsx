@@ -2,12 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 import { getMovieById } from "../apiService/api";
 import { PageTitle } from "../components/PageTitle/PageTitle";
+import { BackLink } from "../components/BackLink/BackLink";
 
 export default function MovieDetailsPage() {
-    const location = useLocation();
-
+const location = useLocation();
 const backLinkRef = useRef(location.state);
-console.log('MovieDetailsPage: ', backLinkRef);
 
 const {moviesId} = useParams();
 
@@ -28,12 +27,10 @@ useEffect(()=>{
 
     return (
         <div>
-        <PageTitle>MovieDetailsPage</PageTitle>
-
-        <Link to={backLinkRef.current ?? "/movies"}>Go back</Link>
+<PageTitle>MovieDetailsPage</PageTitle>
+<BackLink href={backLinkRef.current ?? "/movies"}>Go back</BackLink>
 
         {error && <p>Error fetching movie: {error}</p>}
-
         {movie && (<div>
         <div>
             <h2>Title: {movie.title || movie.name}</h2>
