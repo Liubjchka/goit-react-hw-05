@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom"
+import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 import { getMovieById } from "../apiService/api";
+import { PageTitle } from "../components/PageTitle/PageTitle";
 
 export default function MovieDetailsPage() {
+const location = useLocation();
 const {moviesId} = useParams();
 
 const [movie, setMovie] = useState(null);
@@ -22,7 +24,10 @@ useEffect(()=>{
 
     return (
         <div>
-        <h1>MovieDetailsPage</h1>
+        <PageTitle>MovieDetailsPage</PageTitle>
+
+        <Link to={location.state ?? "/movies"}>Go back</Link>
+
         {error && <p>Error fetching movie: {error}</p>}
 
         {movie && (<div>
