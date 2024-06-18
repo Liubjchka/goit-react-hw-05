@@ -3,14 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 import { Suspense, lazy } from 'react';
 import Loader from '../Loader/Loader';
 
-// import NavBar from '../NavBar/NavBar';
-// import MoviesPage from '../../pages/MoviesPage';
-// import NotFoundPage from '../../pages/NotFoundPage';
-// import HomePage from '../../pages/HomePage'
-// import MovieDetailsPage from '../../pages/MovieDetailsPage';
-// import { MovieCast } from '../MovieCast/MovieCast';
-// import { MovieReviews } from '../MovieReviews/MovieReviews';
-
 const HomePage = lazy(()=> import('../../pages/HomePage'));
 const MoviesPage = lazy(()=> import('../../pages/MoviesPage'));
 const NotFoundPage = lazy(()=> import('../../pages/NotFoundPage'));

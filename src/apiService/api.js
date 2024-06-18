@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Await } from 'react-router-dom';
 
 const BASE_URL = 'https://api.themoviedb.org'
 const API_KEY = '33093cbbc00611921b04f9776f3628fe'
@@ -26,3 +27,9 @@ export const getMovieById = async movieId => {
     return response.data;
 }
 // Питання по baseURL, api_key
+
+export const getMovieReviews = async movieId => {
+    const url = `${BASE_URL}/3/movie/${movieId}/reviews?language=en-US&page=1?api_key=${API_KEY}`
+    const response = await axios.get(url, options)
+    return response.data;
+}

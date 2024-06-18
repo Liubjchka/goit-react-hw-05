@@ -71,9 +71,3 @@ useEffect(()=>{
         </div>
     )
 }
-
-
-// "id": 1022790,
-// "name": "Inside Out Collection",
-// "poster_path": "/Apr19lGxP7gm6y2HQX0kqOXTtqC.jpg",
-// "backdrop_path":  "/bR8H6S3Jc2vhPvz2VWX0dQ3XTFV.jpg"

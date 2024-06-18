@@ -31,7 +31,6 @@ if (filter === "") {
                 setMovies(fetchMovies)
             } catch (error) {
                 if (error.code !== 'ERR_CANCELED') {
-                    // console.log(error);
                     setError(true);
                 }
             } finally {
