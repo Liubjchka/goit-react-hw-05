@@ -65,8 +65,15 @@ useEffect(()=>{
 
 
 <div>
+<h2>Additonal information</h2>
+<ul>
+    <li>
     <Link to='movie-cast'>Movie Cast</Link>
+    </li>
+    <li>
     <Link to='movie-reviews'>Movie Reviews</Link>
+    </li>
+</ul>
 </div>
 <Suspense fallbach={<Loader/>}>
 <Outlet/>

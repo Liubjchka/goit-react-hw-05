@@ -4,6 +4,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { getMovieReviews } from "../../apiService/api";
 import { useParams } from "react-router-dom";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import css from './MovieReviews.module.css'
+
 
 export default function MovieReviews() {
     const [reviews, setReviews] = useState([]);
@@ -36,16 +38,16 @@ export default function MovieReviews() {
             {error && <ErrorMessage />}
             <ToastContainer />
             {reviews.length > 0 ? (
-                <ul>
+                <ul className={css.container}>
                     {reviews.map((review) => (
                         <li key={review.id}>
-                            <p><strong>{review.author}</strong></p>
-                            <p>{review.content}</p>
+                            <h3><strong>Author: {review.author}</strong></h3>
+                            <p>`{review.content}`</p>
                         </li>
                     ))}
                 </ul>
             ) : (
-                !loading && <p>We don’t have any reviews for this movie</p>
+                !loading && <p>We do not have any reviews for this movie</p>
             )}
         </div>
     );

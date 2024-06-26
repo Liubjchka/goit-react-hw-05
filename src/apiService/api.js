@@ -33,3 +33,9 @@ export const getMovieReviews = async movieId => {
     return response.data.results;
     
 }
+
+export const getCast = async movieId => {
+    const url = `${BASE_URL}/3/movie/${movieId}/credits?language=en-US&page=1?api_key=${API_KEY}`
+    const response = await axios.get(url, options);
+    return response.data.cast;
+}
