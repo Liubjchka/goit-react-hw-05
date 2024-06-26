@@ -4,6 +4,8 @@ import { getMovieById } from "../apiService/api";
 import { PageTitle } from "../components/PageTitle/PageTitle";
 import { BackLink } from "../components/BackLink/BackLink";
 import Loader from "../components/Loader/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 
 export default function MovieDetailsPage() {
 const location = useLocation();
@@ -11,7 +13,7 @@ const backLinkRef = useRef(location.state);
 
 const {moviesId} = useParams();
 
-const [movie, setMovie] = useState(null);
+const [movie, setMovie] = useState([]);
 const [error, setError] = useState(null);
 const [loading, setLoading] = useState(false);
 
@@ -22,7 +24,8 @@ useEffect(()=>{
             const fetchedMovie = await getMovieById(moviesId);
             setMovie(fetchedMovie);
         } catch (error) {
-            setError(error.message)
+            setError(error.message);
+            toast.error("Whoops, something went wrong!")
         } finally {
             setLoading(false);
         }
@@ -33,7 +36,8 @@ useEffect(()=>{
     return (
         <div>
         {loading && <Loader/>}
-        {error && <p>Error fetching movie: {error}</p>}
+        {error && <ErrorMessage />}
+        <ToastContainer/>
 <PageTitle>MovieDetailsPage</PageTitle>
 <BackLink href={backLinkRef.current ?? "/movies"} >Go back</BackLink>
         {movie && (<div>
@@ -59,7 +63,7 @@ useEffect(()=>{
             </p>
             </div>
 
-{/* //вкладені маршрути */}
+
 <div>
     <Link to='movie-cast'>Movie Cast</Link>
     <Link to='movie-reviews'>Movie Reviews</Link>

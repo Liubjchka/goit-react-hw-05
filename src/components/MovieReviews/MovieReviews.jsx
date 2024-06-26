@@ -1,47 +1,52 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Loader from "../Loader/Loader";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { getMovieReviews } from "../../apiService/api";
 import { useParams } from "react-router-dom";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 export default function MovieReviews() {
-const [reviews, setReviews] = useState([]);
-const [loading, setLoading] = useState(false);
-const [error, setError] = useState(null);
+    const [reviews, setReviews] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-const {moviesId} = useParams();
+    const { moviesId } = useParams();
 
-useEffect(() => {
-    async function fetchData() {
-        try {
-            setLoading(true);
-            const fetchReviews = await getMovieReviews(moviesId);
-            setReviews(fetchReviews);
-        } catch (error) {
-            setError(true);
-        } finally {
-        setLoading(false);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                setLoading(true);
+                const fetchReviews = await getMovieReviews(moviesId);
+                setReviews(fetchReviews);
+                console.log(fetchReviews);
+            } catch (error) {
+                setError(error.message);
+                toast.error("Whoops, something went wrong!");
+            } finally {
+                setLoading(false);
+            }
         }
-    }
 
-    fetchData();
-console.log(fetchData);
+        fetchData();
+    }, [moviesId]);
 
-}, [moviesId]);
-
-return (
-    <div>
-{loading && <Loader/>}
-{error && <ToastContainer/>}
-{reviews && (
-    <div>
-    <p>
-
-    </p>
-
-    </div>
-)}
-    </div>
-)
+    return (
+        <div>
+            {loading && <Loader />}
+            {error && <ErrorMessage />}
+            <ToastContainer />
+            {reviews.length > 0 ? (
+                <ul>
+                    {reviews.map((review) => (
+                        <li key={review.id}>
+                            <p><strong>{review.author}</strong></p>
+                            <p>{review.content}</p>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                !loading && <p>We don’t have any reviews for this movie</p>
+            )}
+        </div>
+    );
 }

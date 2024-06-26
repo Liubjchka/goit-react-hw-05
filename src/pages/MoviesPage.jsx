@@ -4,10 +4,12 @@ import { MovieList } from "../components/MovieList/MovieList";
 import { getMovies } from "../apiService/api";
 import { useSearchParams } from "react-router-dom";
 import Loader from "../components/Loader/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 
 export default function MoviesPage() {
 const [movies, setMovies] = useState([]);
-const [error, setError] = useState(false);
+const [error, setError] = useState(null);
 const [loading, setLoading] = useState(false);
 
 const [params, setParams] = useSearchParams();
@@ -32,6 +34,7 @@ if (filter === "") {
             } catch (error) {
                 if (error.code !== 'ERR_CANCELED') {
                     setError(true);
+                    toast.error("Whoops, something went wrong!");
                 }
             } finally {
                 setLoading(false);
@@ -56,8 +59,9 @@ const  filteredMovies = movies.filter(movie => movie.title.toLowerCase().include
     return (
         <div>
         {loading && <Loader/>}
+        {error && <ErrorMessage />}
+        <ToastContainer />
         <Filter value={filter} onChange={changeFilter} />
-        {error && <p>OOPS! ERROR!</p>}
         {filteredMovies.length > 0 && <MovieList movies={filteredMovies} />}
       </div>
     )

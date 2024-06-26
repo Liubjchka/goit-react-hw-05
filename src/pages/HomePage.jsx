@@ -4,6 +4,8 @@ import { getMovies } from "../apiService/api";
 import { MovieList } from "../components/MovieList/MovieList";
 import { PageTitle } from "../components/PageTitle/PageTitle";
 import Loader from "../components/Loader/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 
 export default function HomePage() {
 const [movies, setMovies] =  useState([]);
@@ -23,7 +25,8 @@ const controller = new AbortController();
             setMovies(fetchMovies)
         } catch (error) {
             if (error.code !== 'ERR_CANCELED') {
-                setError(true);
+                setError(error.message);
+                toast.error("Whoops, something went wrong!")
             }
         } finally {
             setLoading(false);
@@ -39,6 +42,8 @@ return () =>{
 return (
     <div>
     {loading && <Loader/>}
+    {error && <ErrorMessage />}
+    <ToastContainer/>
     <PageTitle>Trending today</PageTitle>
     {error && <p>OOPS! ERROR!</p>}
     {movies.length > 0 && <MovieList movies={movies} />}
