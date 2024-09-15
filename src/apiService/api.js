@@ -23,6 +23,7 @@ export const getMovies = async ({abortController}) => {
 export const getMovieById = async movieId => {
     const url = `${BASE_URL}/3/movie/${movieId}?language=en-US?api_key=${API_KEY}`
     const response = await axios.get(url, options)
+    console.log(response.data);
     return response.data;
 }
 

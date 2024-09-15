@@ -4,6 +4,7 @@ import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { getCast } from "../../apiService/api";
 import { useParams } from "react-router-dom";
+import Pagination from "../Pagination/Pagination";
 
 export default function MovieCast() {
 const [cast, setCast] = useState([]);
@@ -34,6 +35,8 @@ useEffect(()=>{
         {loading && <Loader/>}
         {error && <ErrorMessage/>}
         <ToastContainer/>
+
+        <Pagination cast={cast}/>
 
         {cast.length > 0 ? (
             <ul>

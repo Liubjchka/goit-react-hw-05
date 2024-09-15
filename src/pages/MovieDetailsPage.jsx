@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 import { getMovieById } from "../apiService/api";
-import { PageTitle } from "../components/PageTitle/PageTitle";
+// import { PageTitle } from "../components/PageTitle/PageTitle";
 import { BackLink } from "../components/BackLink/BackLink";
 import Loader from "../components/Loader/Loader";
 import { ToastContainer, toast } from "react-toastify";
@@ -38,13 +38,14 @@ useEffect(()=>{
         {loading && <Loader/>}
         {error && <ErrorMessage />}
         <ToastContainer/>
-<PageTitle>MovieDetailsPage</PageTitle>
-<BackLink href={backLinkRef.current ?? "/movies"} >Go back</BackLink>
+        <BackLink href={backLinkRef.current ?? "/movies"} >Go back</BackLink>
         {movie && (<div>
         <div>
-            <h2>Title: {movie.title || movie.name}</h2>
+            <h1>Title: {movie.title || movie.name}</h1>
             <p>Runtime: {movie.runtime} min</p>
-            <p>Description: {movie.overview}</p>
+            <h2>Overview</h2>
+            <p>{movie.overview}</p>
+            <h2>Genres</h2>
             <p>
             {movie.poster_path && (
             <img
